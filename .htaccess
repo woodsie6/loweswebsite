@@ -1,0 +1,22 @@
+# ═══ Security Headers ═══
+
+# Content Security Policy
+Header set Content-Security-Policy "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+# Prevent MIME type sniffing
+Header set X-Content-Type-Options "nosniff"
+
+# Referrer Policy
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Prevent clickjacking
+Header set X-Frame-Options "DENY"
+
+# XSS Protection (legacy browsers)
+Header set X-XSS-Protection "1; mode=block"
+
+# Strict Transport Security (HTTPS only)
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+# Permissions Policy
+Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
