@@ -370,23 +370,42 @@ body.menu-open .mobile-menu-links a:nth-child(4) { transition-delay: 0.26s; }
   position: absolute;
   inset: 0;
   z-index: 0;
+  background:
+    radial-gradient(1100px 620px at 78% 18%, rgba(62, 104, 184, 0.3), transparent 62%),
+    radial-gradient(850px 520px at 8% 92%, rgba(242, 163, 60, 0.1), transparent 55%),
+    var(--dark);
 }
 
-.hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(calc(1.18 - 0.14 * var(--p, 0)));
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 196, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 196, 0.07) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: radial-gradient(120% 100% at 70% 40%, black 30%, transparent 78%);
+  mask-image: radial-gradient(120% 100% at 70% 40%, black 30%, transparent 78%);
+}
+
+.hero-art {
+  position: absolute;
+  z-index: 1;
+  right: 2%;
+  bottom: 6%;
+  width: min(58vw, 860px);
+  opacity: 0.85;
+  transform: translateY(calc(var(--p, 0) * 90px));
   will-change: transform;
+  pointer-events: none;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(to top, rgba(11, 17, 32, calc(0.55 + 0.45 * var(--p, 0))) 0%, rgba(11, 17, 32, 0.35) 45%),
-    linear-gradient(115deg, rgba(11, 17, 32, 0.88) 0%, rgba(11, 17, 32, 0.55) 55%, rgba(11, 17, 32, 0.25) 100%);
+  pointer-events: none;
+  background: rgba(11, 17, 32, calc(0.6 * var(--p, 0)));
 }
 
 .hero-content {
@@ -697,15 +716,35 @@ body.is-loaded .load-in { opacity: 1; transform: translateY(0); }
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.stack-media { position: relative; overflow: hidden; min-height: 260px; }
+.stack-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  background:
+    radial-gradient(600px 400px at 70% 20%, rgba(62, 104, 184, 0.22), transparent 60%),
+    linear-gradient(160deg, var(--dark-2) 0%, var(--dark) 100%);
+}
 
-.stack-media img {
+.stack-media::before {
+  content: "";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-image:
+    linear-gradient(rgba(148, 163, 196, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 196, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(110% 110% at 50% 45%, black 35%, transparent 85%);
+  mask-image: radial-gradient(110% 110% at 50% 45%, black 35%, transparent 85%);
 }
+
+.stack-media svg {
+  position: absolute;
+  inset: 7% 7% 9%;
+  width: 86%;
+  height: 84%;
+}
+
+.stack-media[data-reveal] { transform: none; }
 
 .stack-body {
   padding: clamp(1.75rem, 4vw, 3.25rem);
@@ -890,20 +929,37 @@ body.is-loaded .load-in { opacity: 1; transform: translateY(0); }
 
 .sectors-panel { display: grid; gap: 1rem; }
 
-.sectors-photo {
+.sectors-art {
+  position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4 / 3;
   box-shadow: var(--shadow-lg);
+  background:
+    radial-gradient(700px 460px at 75% 15%, rgba(62, 104, 184, 0.22), transparent 60%),
+    linear-gradient(160deg, var(--dark-2) 0%, var(--dark) 100%);
 }
 
-.parallax-img img {
-  width: 100%;
-  height: 118%;
-  object-fit: cover;
-  transform: translateY(calc(var(--p, 0.5) * -14%));
-  will-change: transform;
+.sectors-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 196, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 196, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(110% 110% at 50% 45%, black 35%, transparent 85%);
+  mask-image: radial-gradient(110% 110% at 50% 45%, black 35%, transparent 85%);
 }
+
+.sectors-art svg {
+  position: absolute;
+  inset: 7% 7% 9%;
+  width: 86%;
+  height: 84%;
+}
+
+.sectors-art[data-reveal] { transform: none; }
 
 .sector-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 
@@ -1093,6 +1149,31 @@ body.is-loaded .load-in { opacity: 1; transform: translateY(0); }
 .footer-meta { display: grid; gap: 0.5rem; }
 .footer-meta p { color: rgba(255, 255, 255, 0.45); font-size: 0.82rem; }
 
+/* ═══ Blueprint line art ═══ */
+.blueprint { display: block; }
+
+.blueprint .s-ln { stroke: rgba(214, 224, 240, 0.55); }
+.blueprint .s-soft { stroke: rgba(214, 224, 240, 0.2); }
+.blueprint .s-amber { stroke: var(--accent); }
+.blueprint .f-amber { fill: var(--accent); stroke: none; }
+
+.blueprint .f-amber-glow {
+  fill: rgba(242, 163, 60, 0.16);
+  stroke: rgba(242, 163, 60, 0.85);
+  stroke-width: 2.5;
+}
+
+/* Draw-in: app.js sets pathLength/dasharray inline; these rules animate it */
+@keyframes blueprint-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+body.is-loaded .hero-art .blueprint :is(path, rect, circle, line),
+[data-reveal].is-visible .blueprint :is(path, rect, circle, line) {
+  animation: blueprint-draw 1.3s var(--ease-out) forwards;
+  animation-delay: calc(0.25s + var(--n, 0) * 0.04s);
+}
+
 /* ═══ Reveal on scroll ═══ */
 [data-reveal] {
   opacity: 0;
@@ -1136,6 +1217,12 @@ body.is-loaded .load-in { opacity: 1; transform: translateY(0); }
 
   .hero-pin { height: 150svh; }
   .hero-sticky { min-height: 520px; }
+  .hero-art {
+    width: 130%;
+    right: -18%;
+    bottom: 2%;
+    opacity: 0.3;
+  }
   .hero-sub { font-size: 0.98rem; }
   .hero-actions .btn { width: 100%; }
   .hero-badges { gap: 0.4rem 1.1rem; }
@@ -1170,14 +1257,19 @@ body.is-loaded .load-in { opacity: 1; transform: translateY(0); }
 
   .hero-pin { height: auto; }
   .hero-sticky { position: relative; height: auto; min-height: 90vh; }
-  .hero-bg img { transform: none; }
+  .hero-art { transform: none; }
   .hero-content { opacity: 1; transform: none; }
 
   .stack-item { position: relative; top: auto; }
   .stack-card { transform: none; filter: none; }
 
-  .parallax-img img { transform: none; height: 100%; }
   .timeline-line { transform: scaleY(1); }
+
+  .blueprint :is(path, rect, circle, line) {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
 
   .pulse-dot::after, .scroll-cue-dot { animation: none; }
 

@@ -12,6 +12,19 @@ window.addEventListener('load', () => {
 // Fallback in case load stalls on a slow asset
 setTimeout(() => document.body.classList.add('is-loaded'), 2500);
 
+/* ─── Blueprint line art: prep shapes for draw-in animation ─── */
+if (!prefersReducedMotion) {
+  document.querySelectorAll('.blueprint').forEach((svg) => {
+    svg.querySelectorAll('path, rect, circle, line').forEach((shape, i) => {
+      if (shape.classList.contains('f-amber')) return;
+      shape.setAttribute('pathLength', '1');
+      shape.style.strokeDasharray = '1';
+      shape.style.strokeDashoffset = '1';
+      shape.style.setProperty('--n', i);
+    });
+  });
+}
+
 /* ─── Reveal on scroll ─── */
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -66,7 +79,6 @@ const hero = document.getElementById('hero');
 const heroSticky = hero ? hero.querySelector('.hero-sticky') : null;
 const timeline = document.getElementById('timeline');
 const timelineLine = document.getElementById('timeline-line');
-const parallaxEls = document.querySelectorAll('.parallax-img');
 const stackItems = document.querySelectorAll('.stack-item');
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
@@ -111,13 +123,6 @@ function update() {
       const p = clamp01((vh * 0.72 - rect.top) / rect.height);
       timelineLine.style.transform = `scaleY(${p.toFixed(4)})`;
     }
-
-    /* Parallax images */
-    parallaxEls.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const p = clamp01((vh - rect.top) / (vh + rect.height));
-      el.style.setProperty('--p', p.toFixed(4));
-    });
 
     /* Sticky-stack: scale a card down as the next one covers it */
     stackItems.forEach((item, i) => {
