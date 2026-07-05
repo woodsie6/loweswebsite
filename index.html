@@ -5,198 +5,388 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Lowes Building Services Limited delivers construction and maintenance services across North Wales and into England for councils and education providers."
+      content="Lowes Building Services Limited — trusted construction, planned maintenance and 24/7 emergency response for councils and education providers across North Wales and North West England. Est. 1998."
     />
-    <title>Lowes Building Services Limited | Construction & Maintenance</title>
+    <meta property="og:title" content="Lowes Building Services Limited | Construction &amp; Maintenance" />
+    <meta property="og:description" content="Trusted construction, planned maintenance and rapid emergency response for the public sector. Est. 1998. SafeContractor Approved. Constructionline Silver." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/hero.jpg" />
+    <title>Lowes Building Services Limited | Construction &amp; Maintenance</title>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
       crossorigin
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GeneralContractor",
+      "name": "Lowes Building Services Limited",
+      "telephone": "+441244552233",
+      "email": "enquiries@lowesbuildingservices.co.uk",
+      "foundingDate": "1998",
+      "areaServed": ["North Wales", "North West England"],
+      "description": "Construction, planned maintenance and emergency response for councils and education providers."
+    }
+    </script>
   </head>
   <body>
 
-    <header class="site-header">
+    <!-- Scroll progress -->
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <!-- ═══ Header ═══ -->
+    <header class="site-header" id="site-header">
       <div class="container nav-wrap">
-        <a class="brand" href="#top" aria-label="Lowes Building Services Limited">
-          <img src="./assets/logo-dark.png" alt="Lowes Building Services Limited logo" />
+        <a class="brand" href="#top" aria-label="Lowes Building Services Limited — home">
+          <img class="brand-on-dark" src="./assets/logo-white.png" alt="Lowes Building Services Limited logo" />
+          <img class="brand-on-light" src="./assets/logo-trans.png" alt="" aria-hidden="true" />
         </a>
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Primary">
           <a href="#services">Services</a>
+          <a href="#process">How We Work</a>
           <a href="#sectors">Sectors</a>
-          <a href="#contact">About</a>
-          <a class="btn btn-primary" href="#contact">Get in Touch</a>
+          <a href="#contact">Contact</a>
+          <a class="btn btn-accent nav-cta" href="#contact">Get a Fast Quote</a>
         </nav>
+        <a class="nav-phone" href="tel:01244552233" aria-label="Call 01244 552233">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>01244 552233</span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span>
+        </button>
       </div>
     </header>
 
+    <!-- ═══ Mobile menu ═══ -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav class="mobile-menu-links" aria-label="Mobile">
+        <a href="#services"><em>01</em>Services</a>
+        <a href="#process"><em>02</em>How We Work</a>
+        <a href="#sectors"><em>03</em>Sectors</a>
+        <a href="#contact"><em>04</em>Contact</a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <a class="btn btn-accent btn-lg btn-block" href="#contact">Get a Fast Quote</a>
+        <a class="mobile-menu-phone" href="tel:01244552233">24/7 Emergency &middot; 01244 552233</a>
+      </div>
+    </div>
+
     <main id="top">
 
-      <!-- Hero -->
-      <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content section-reveal">
-          <p class="hero-tag">North Wales Framework Supplier</p>
-          <h1>Trusted construction.<br />Responsive maintenance.<br />Public sector ready.</h1>
-          <p class="hero-sub">
-            Lowes Building Services supports councils and education providers
-            with dependable construction delivery, planned maintenance, and rapid
-            emergency response across North Wales and into England.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="#contact">
-              Contact Us
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <a class="btn btn-outline-light btn-lg" href="#services">Explore Services</a>
+      <!-- ═══ Hero (pinned, scroll-scrubbed) ═══ -->
+      <section class="hero-pin" id="hero" data-scrub>
+        <div class="hero-sticky">
+          <div class="hero-bg" aria-hidden="true">
+            <img src="./assets/hero.jpg" alt="" fetchpriority="high" />
           </div>
-        </div>
-      </section>
-
-      <!-- Accreditations -->
-      <section class="badges-bar section-reveal">
-        <div class="container badges-row">
-          <div class="badge-card">
-            <img class="badge-logo" src="./assets/safecontractor-badge.png" alt="SafeContractor Approved badge" />
-            <div class="badge-info">
-              <span class="badge-name">SafeContractor</span>
-              <span class="badge-status">Approved</span>
+          <div class="hero-overlay" aria-hidden="true"></div>
+          <div class="container hero-content">
+            <p class="hero-tag load-in" style="--d:0.1s">Est. 1998 &middot; North Wales &amp; North West England</p>
+            <h1 class="kinetic" aria-label="We build, maintain and protect the spaces your community relies on.">
+              <span class="line"><span class="w" style="--d:0.20s">We&nbsp;build,</span> <span class="w" style="--d:0.28s">maintain</span></span>
+              <span class="line"><span class="w" style="--d:0.36s">and&nbsp;protect</span> <span class="w" style="--d:0.44s">the&nbsp;spaces</span></span>
+              <span class="line"><span class="w" style="--d:0.52s">your&nbsp;community</span></span>
+              <span class="line"><span class="w w-accent" style="--d:0.60s">relies&nbsp;on.</span></span>
+            </h1>
+            <p class="hero-sub load-in" style="--d:0.75s">
+              Construction, planned maintenance and 24/7 emergency response for
+              councils and education providers — delivered by one accountable
+              team for over 27 years.
+            </p>
+            <div class="hero-actions load-in" style="--d:0.9s">
+              <a class="btn btn-accent btn-lg" href="#contact" data-magnetic>
+                Get a Fast Quote
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="tel:01244552233" data-magnetic>
+                <span class="pulse-dot" aria-hidden="true"></span>
+                24/7 Emergency Line
+              </a>
+            </div>
+            <div class="hero-badges load-in" style="--d:1.05s" aria-label="Accreditations">
+              <span>SafeContractor Approved</span>
+              <span>Constructionline Silver</span>
+              <span>Public Sector Frameworks</span>
             </div>
           </div>
-          <div class="badge-card">
-            <img class="badge-logo" src="./assets/constructionline-badge.jpg" alt="Constructionline Silver Member badge" />
-            <div class="badge-info">
-              <span class="badge-name">Constructionline</span>
-              <span class="badge-status">Silver Member</span>
-            </div>
+          <div class="scroll-cue load-in" style="--d:1.3s" aria-hidden="true">
+            <span class="scroll-cue-track"><span class="scroll-cue-dot"></span></span>
+            <span class="scroll-cue-label">Scroll</span>
           </div>
         </div>
       </section>
 
-      <!-- Stats -->
-      <section class="stats-strip section-reveal" aria-label="Key strengths">
-        <div class="container stats-grid">
-          <article>
-            <p class="stat-number" data-count="27" data-suffix="+">27+</p>
-            <p class="stat-label">Years of Delivery</p>
-          </article>
-          <article>
-            <p class="stat-number">100s</p>
-            <p class="stat-label">Successful Projects</p>
-          </article>
-          <article>
-            <p class="stat-number">Rapid</p>
-            <p class="stat-label">Emergency Response</p>
-          </article>
-          <article>
-            <p class="stat-number">Framework</p>
-            <p class="stat-label">Public Sector Focus</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Services -->
-      <section id="services" class="section section-alt">
-        <div class="container">
-          <p class="section-tag section-reveal">Our Services</p>
-          <h2 class="section-reveal">Construction and maintenance under one accountable team.</h2>
-          <div class="service-grid">
-            <article class="service-card section-reveal stagger-1">
-              <div class="service-img">
-                <img src="./assets/hero.jpg" alt="Construction works" loading="lazy" />
+      <!-- ═══ Trust strip ═══ -->
+      <section class="trust-strip" aria-label="Accreditations and credentials">
+        <div class="container trust-row" data-reveal>
+          <p class="trust-lead">Vetted, audited and trusted by the public sector</p>
+          <div class="trust-badges">
+            <div class="badge-card" data-reveal style="--d:0.05s">
+              <img class="badge-logo" src="./assets/safecontractor-badge.png" alt="SafeContractor Approved badge" loading="lazy" />
+              <div class="badge-info">
+                <span class="badge-name">SafeContractor</span>
+                <span class="badge-status">Approved</span>
               </div>
-              <div class="service-body">
+            </div>
+            <div class="badge-card" data-reveal style="--d:0.12s">
+              <img class="badge-logo" src="./assets/constructionline-badge.jpg" alt="Constructionline Silver Member badge" loading="lazy" />
+              <div class="badge-info">
+                <span class="badge-name">Constructionline</span>
+                <span class="badge-status">Silver Member</span>
+              </div>
+            </div>
+            <div class="badge-card badge-card-text" data-reveal style="--d:0.19s">
+              <div class="badge-year">1998</div>
+              <div class="badge-info">
+                <span class="badge-name">Established</span>
+                <span class="badge-status">27+ years of delivery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Stats (dark band) ═══ -->
+      <section class="stats-band" aria-label="Key numbers">
+        <div class="container">
+          <p class="section-tag section-tag-light" data-reveal>The Numbers</p>
+          <h2 class="stats-heading" data-reveal>Chosen and re-chosen,<br />year after year.</h2>
+          <div class="stats-grid">
+            <article data-reveal style="--d:0.05s">
+              <p class="stat-number"><span data-count="27">0</span><em>+</em></p>
+              <p class="stat-label">Years of continuous delivery</p>
+            </article>
+            <article data-reveal style="--d:0.12s">
+              <p class="stat-number"><span data-count="100">0</span><em>s</em></p>
+              <p class="stat-label">Projects completed across our core services</p>
+            </article>
+            <article data-reveal style="--d:0.19s">
+              <p class="stat-number">24<em>/7</em></p>
+              <p class="stat-label">Emergency response, around the clock</p>
+            </article>
+            <article data-reveal style="--d:0.26s">
+              <p class="stat-number"><span data-count="1998" data-start="1900" data-plain>1900</span></p>
+              <p class="stat-label">Incorporated — and still family-run</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Services (sticky-stack cards) ═══ -->
+      <section id="services" class="section services-section">
+        <div class="container">
+          <p class="section-tag" data-reveal>What We Do</p>
+          <h2 data-reveal>Three services.<br />One accountable team.</h2>
+          <p class="section-intro" data-reveal>
+            No layers of subcontracting, no passing the buck. The team that
+            quotes your work is the team that stands behind it.
+          </p>
+        </div>
+        <div class="container stack" id="stack">
+
+          <article class="stack-item" style="--i:0">
+            <div class="stack-card">
+              <div class="stack-media">
+                <img src="./assets/hero.jpg" alt="Construction works on a public sector building" loading="lazy" />
+              </div>
+              <div class="stack-body">
+                <span class="stack-num">01</span>
                 <h3>Construction Works</h3>
                 <p>
-                  New build, upgrades, and refurbishments delivered to programme,
-                  budget, and public sector quality expectations.
+                  New builds, extensions, upgrades and full refurbishments —
+                  delivered to programme, to budget, and to the quality standard
+                  the public sector audits for. We keep sites safe, neighbours
+                  informed and stakeholders confident from day one.
                 </p>
+                <ul class="stack-points">
+                  <li>New build &amp; refurbishment</li>
+                  <li>Programme &amp; budget certainty</li>
+                  <li>Framework-compliant delivery</li>
+                </ul>
+                <a class="text-link" href="#contact">Scope your project <span aria-hidden="true">&rarr;</span></a>
               </div>
-            </article>
-            <article class="service-card section-reveal stagger-2">
-              <div class="service-img">
-                <img src="./assets/services.jpg" alt="Planned maintenance" loading="lazy" />
+            </div>
+          </article>
+
+          <article class="stack-item" style="--i:1">
+            <div class="stack-card">
+              <div class="stack-media">
+                <img src="./assets/services.jpg" alt="Planned maintenance works" loading="lazy" />
               </div>
-              <div class="service-body">
+              <div class="stack-body">
+                <span class="stack-num">02</span>
                 <h3>Planned Maintenance</h3>
                 <p>
-                  Preventative and cyclical works that reduce risk, control spend,
-                  and keep estates operational all year round.
+                  Preventative and cyclical programmes that stop small issues
+                  becoming capital projects. We keep schools open, offices
+                  running and estates compliant — with spend you can forecast
+                  and report on.
                 </p>
+                <ul class="stack-points">
+                  <li>Preventative &amp; cyclical programmes</li>
+                  <li>Predictable, reportable spend</li>
+                  <li>Minimal disruption to occupants</li>
+                </ul>
+                <a class="text-link" href="#contact">Plan your programme <span aria-hidden="true">&rarr;</span></a>
               </div>
-            </article>
-            <article class="service-card section-reveal stagger-3">
-              <div class="service-img">
-                <img src="./assets/emergency.jpg" alt="Emergency response" loading="lazy" />
+            </div>
+          </article>
+
+          <article class="stack-item" style="--i:2">
+            <div class="stack-card stack-card-dark">
+              <div class="stack-media">
+                <img src="./assets/emergency.jpg" alt="Emergency response works" loading="lazy" />
               </div>
-              <div class="service-body">
+              <div class="stack-body">
+                <span class="stack-num">03</span>
                 <h3>Reactive &amp; Emergency Response</h3>
                 <p>
-                  Fast, coordinated response to urgent issues with practical action,
-                  clear communication, and minimal disruption.
+                  Storm damage, failed heating, burst pipes, make-safes — when
+                  something can't wait, we answer. Coordinated response, clear
+                  communication, and a site made safe fast.
                 </p>
+                <ul class="stack-points">
+                  <li>24/7 emergency call-out</li>
+                  <li>Rapid make-safe &amp; repair</li>
+                  <li>One number, clear updates</li>
+                </ul>
+                <a class="text-link text-link-accent" href="tel:01244552233">Call the response line <span aria-hidden="true">&rarr;</span></a>
               </div>
-            </article>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ═══ Process (scroll-drawn timeline) ═══ -->
+      <section id="process" class="section section-alt process-section">
+        <div class="container process-grid">
+          <div class="process-head">
+            <p class="section-tag" data-reveal>How We Work</p>
+            <h2 data-reveal>From first call to finished job — without the runaround.</h2>
+            <p class="section-intro" data-reveal>
+              Four steps, zero chasing. You'll always know what's happening,
+              what it costs, and who's accountable.
+            </p>
+          </div>
+          <div class="timeline" id="timeline">
+            <div class="timeline-track" aria-hidden="true"><span class="timeline-line" id="timeline-line"></span></div>
+            <ol class="timeline-steps">
+              <li class="timeline-step" data-reveal>
+                <span class="step-dot" aria-hidden="true"></span>
+                <span class="step-num">Step 1</span>
+                <h3>Talk to a decision-maker</h3>
+                <p>Call or email and you reach someone who can actually say yes. Every enquiry gets a response within one working day.</p>
+              </li>
+              <li class="timeline-step" data-reveal>
+                <span class="step-dot" aria-hidden="true"></span>
+                <span class="step-num">Step 2</span>
+                <h3>Survey &amp; straight answer</h3>
+                <p>We survey, we scope, and we give you a clear price and programme. No padding, no surprises buried in the small print.</p>
+              </li>
+              <li class="timeline-step" data-reveal>
+                <span class="step-dot" aria-hidden="true"></span>
+                <span class="step-num">Step 3</span>
+                <h3>Delivery you can report on</h3>
+                <p>Works run to programme with proactive updates, compliant documentation and a tidy, safe site throughout.</p>
+              </li>
+              <li class="timeline-step" data-reveal>
+                <span class="step-dot" aria-hidden="true"></span>
+                <span class="step-num">Step 4</span>
+                <h3>Aftercare &amp; partnership</h3>
+                <p>We snag, we hand over properly, and we stay on the end of the phone. Most of our work comes from clients who came back.</p>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- Sectors + Trust -->
+      <!-- ═══ Sectors ═══ -->
       <section id="sectors" class="section">
         <div class="container sectors-grid">
-          <div class="sectors-copy section-reveal">
+          <div class="sectors-copy" data-reveal>
             <p class="section-tag">Sectors We Serve</p>
             <h2>Built around council and education requirements.</h2>
-            <p>
-              We understand how public sector estates operate and deliver works with
-              compliance, continuity, and stakeholder confidence at the centre.
+            <p class="section-intro">
+              Public sector estates don't run like private ones — procurement,
+              compliance, term dates, stakeholders. We've worked inside those
+              constraints for 27 years, so you don't spend your time explaining them.
             </p>
-            <div class="pill-row">
-              <span>Councils</span>
-              <span>Education</span>
-              <span>Public Sector Estates</span>
-            </div>
+            <ul class="check-list">
+              <li>Framework-oriented, collaborative delivery</li>
+              <li>DBS-checked teams comfortable on live school sites</li>
+              <li>Compliance documentation that survives an audit</li>
+              <li>Works programmed around term dates and service hours</li>
+            </ul>
+            <a class="btn btn-dark" href="#contact" data-magnetic>Discuss a framework or tender</a>
           </div>
-          <div class="trust-panel section-reveal">
-            <div class="trust-photo">
-              <img src="./assets/about.jpg" alt="Completed building project" loading="lazy" />
+          <div class="sectors-panel" data-reveal style="--d:0.15s">
+            <div class="sectors-photo parallax-img" data-scrub>
+              <img src="./assets/about.jpg" alt="Completed public sector building project" loading="lazy" />
             </div>
-            <div class="trust-body">
-              <h3>Why clients choose Lowes</h3>
-              <ul>
-                <li>Established business incorporated in 1998</li>
-                <li>Hundreds of completed projects across core services</li>
-                <li>Framework-oriented delivery and collaborative working</li>
-                <li>Rapid response capability for high-priority issues</li>
-              </ul>
+            <div class="sector-chips">
+              <div class="sector-chip"><strong>Councils</strong><span>Housing, civic &amp; operational estates</span></div>
+              <div class="sector-chip"><strong>Education</strong><span>Schools, colleges &amp; campuses</span></div>
+              <div class="sector-chip"><strong>Public Estates</strong><span>Health, leisure &amp; community buildings</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Contact -->
-      <section id="contact" class="section section-alt">
-        <div class="container contact-block section-reveal">
-          <div class="contact-copy">
-            <p class="section-tag">Start a Conversation</p>
-            <h2>Contact us for construction, maintenance, or framework enquiries.</h2>
-            <p>
-              Speak directly with our team to discuss your requirement and delivery
-              timescales.
-            </p>
+      <!-- ═══ Emergency band ═══ -->
+      <section class="emergency-band" aria-label="Emergency call-out">
+        <div class="container emergency-wrap" data-reveal>
+          <div class="emergency-copy">
+            <p class="emergency-kicker"><span class="pulse-dot" aria-hidden="true"></span> Emergency? Don't wait.</p>
+            <h2>Storm damage. Burst pipes. Failed heating.<br />We answer — day or night.</h2>
+            <p>Every hour a building stays unsafe costs you money and goodwill. One call gets a coordinated team moving.</p>
           </div>
-          <div class="contact-links" role="list">
-            <a role="listitem" href="tel:01244552233">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              01244 552233
+          <a class="emergency-cta" href="tel:01244552233" data-magnetic>
+            <span class="emergency-cta-label">Call the 24/7 line now</span>
+            <span class="emergency-cta-number">01244 552233</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ═══ Contact / final CTA ═══ -->
+      <section id="contact" class="section contact-section">
+        <div class="container contact-block">
+          <div class="contact-copy" data-reveal>
+            <p class="section-tag">Start Today</p>
+            <h2>Tell us what you need.<br />We'll respond within one working day.</h2>
+            <p class="section-intro">
+              Construction project, maintenance programme, framework enquiry or
+              urgent repair — speak directly with our team and get a straight
+              answer on scope, timescales and cost.
+            </p>
+            <p class="contact-area">Serving North Wales &amp; North West England &middot; Est. 1998</p>
+          </div>
+          <div class="contact-links" role="list" data-reveal style="--d:0.15s">
+            <a role="listitem" class="contact-card" href="tel:01244552233">
+              <span class="contact-card-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="contact-card-body">
+                <strong>Call us now</strong>
+                <span>01244 552233 &middot; 24/7 for emergencies</span>
+              </span>
+              <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
             </a>
-            <a role="listitem" id="email-link" href="#">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span id="email-text">Loading...</span>
+            <a role="listitem" class="contact-card" id="email-link" href="#">
+              <span class="contact-card-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+              <span class="contact-card-body">
+                <strong>Email your enquiry</strong>
+                <span id="email-text">Loading&hellip;</span>
+              </span>
+              <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </div>
@@ -204,10 +394,23 @@
 
     </main>
 
+    <!-- ═══ Footer ═══ -->
     <footer class="site-footer">
       <div class="container footer-wrap">
-        <p>&copy; 2026 Lowes Building Services Limited</p>
-        <p>Trusted Construction. Responsive Maintenance. Public Sector Ready.</p>
+        <div class="footer-brand">
+          <img class="footer-logo" src="./assets/logo-white.png" alt="Lowes Building Services Limited logo" loading="lazy" />
+          <p>Trusted construction. Responsive maintenance.<br />Public sector ready.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="#services">Services</a>
+          <a href="#process">How We Work</a>
+          <a href="#sectors">Sectors</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="footer-meta">
+          <p>SafeContractor Approved &middot; Constructionline Silver</p>
+          <p>&copy; 2026 Lowes Building Services Limited</p>
+        </div>
       </div>
     </footer>
 
