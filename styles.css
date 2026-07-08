@@ -475,8 +475,9 @@ body.menu-open .mobile-menu-links a:nth-child(4) { transition-delay: 0.26s; }
   margin-bottom: -0.08em;
 }
 
-.kinetic .w {
-  display: inline-block;
+.kinetic .w { display: inline-block; }
+
+.js .kinetic .w {
   transform: translateY(115%);
   opacity: 0;
   transition: transform 0.9s var(--ease-out), opacity 0.6s ease;
@@ -488,7 +489,7 @@ body.menu-open .mobile-menu-links a:nth-child(4) { transition-delay: 0.26s; }
 body.is-loaded .kinetic .w { transform: translateY(0); opacity: 1; }
 
 /* Load-in elements */
-.load-in {
+.js .load-in {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.8s ease, transform 0.8s var(--ease-out);

@@ -5,12 +5,15 @@
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ─── Load-in (kinetic hero) ─── */
-window.addEventListener('load', () => {
-  requestAnimationFrame(() => document.body.classList.add('is-loaded'));
-});
-// Fallback in case load stalls on a slow asset
-setTimeout(() => document.body.classList.add('is-loaded'), 2500);
+/* ─── Load-in (kinetic hero) ───
+   Reveal as soon as the DOM is ready. We deliberately do NOT wait for the
+   window 'load' event: it blocks on every asset (web fonts, images), so a
+   slow font could leave the hero hidden for seconds and cause a flash.
+   The double rAF lets the hidden initial state paint once so the transition
+   plays smoothly. */
+requestAnimationFrame(() =>
+  requestAnimationFrame(() => document.body.classList.add('is-loaded'))
+);
 
 /* ─── Blueprint line art: prep shapes for draw-in animation ─── */
 if (!prefersReducedMotion) {

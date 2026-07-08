@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Marks JS as available before first paint so reveal animations start
+         hidden (and stay visible as a fallback if JS is disabled). -->
+    <script>document.documentElement.classList.add("js");</script>
     <meta
       name="description"
       content="Lowes Building Services Limited — trusted construction, planned maintenance and contracted reactive response for councils and education providers across North Wales and North West England. Est. 1998."
