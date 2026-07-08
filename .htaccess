@@ -1,7 +1,9 @@
 # ═══ Security Headers ═══
 
 # Content Security Policy
-Header set Content-Security-Policy "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+# 'unsafe-inline' on style-src permits the inline style="--d/--i" animation
+# hooks and CSS custom properties. Scripts stay strict ('self' only).
+Header set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
 
 # Prevent MIME type sniffing
 Header set X-Content-Type-Options "nosniff"
