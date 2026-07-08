@@ -1,3 +1,14 @@
+# ═══ Canonical Host ═══
+# Send www → non-www (apex) so there's one canonical address.
+# The condition matches ONLY the exact host "www.lowesbuildingservices.co.uk",
+# so app.lowesbuildingservices.co.uk and every other subdomain are untouched.
+# (The app subdomain also has its own docroot, so this file never runs for it.)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.lowesbuildingservices\.co\.uk$ [NC]
+  RewriteRule ^ https://lowesbuildingservices.co.uk%{REQUEST_URI} [R=301,L]
+</IfModule>
+
 # ═══ Security Headers ═══
 
 # Content Security Policy
