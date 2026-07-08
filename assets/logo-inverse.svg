@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 170" role="img" aria-label="Lowes Building Services Ltd">
+  <rect x="8"   y="8" width="62" height="74" fill="#00509f"/>
+  <rect x="77"  y="8" width="62" height="74" fill="#4070b0"/>
+  <rect x="146" y="8" width="62" height="74" fill="#8090c0"/>
+  <g fill="#ffffff" font-family="Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="60" text-anchor="middle">
+    <text x="39"  y="66">L</text>
+    <text x="108" y="66">B</text>
+    <text x="177" y="66">S</text>
+  </g>
+  <text x="8" y="131" textLength="200" lengthAdjust="spacingAndGlyphs" fill="#ffffff" font-family="'Arial Black', Arial, 'Helvetica Neue', sans-serif" font-weight="900" font-size="52">LOWES</text>
+  <text x="8" y="158" textLength="200" lengthAdjust="spacingAndGlyphs" fill="#ffffff" font-family="Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="15">BUILDING SERVICES LTD</text>
+</svg>
