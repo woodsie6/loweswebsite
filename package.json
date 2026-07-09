@@ -1,0 +1,20 @@
+{
+  "name": "lowes-building-services-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "packageManager": "npm@10.9.8",
+  "scripts": {
+    "check": "npm run check:static && npm run check:browser",
+    "check:static": "node --check app.js && node scripts/check-static.mjs && html-validate index.html",
+    "check:browser": "playwright test",
+    "test": "npm run check"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "html-validate": "11.5.5"
+  }
+}

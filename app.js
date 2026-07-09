@@ -4,6 +4,22 @@
    ════════════════════════════════════════════ */
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const currentYear = new Date().getFullYear();
+
+/* ─── Durable date-derived copy ─── */
+document.querySelectorAll('[data-current-year]').forEach((el) => {
+  el.textContent = currentYear;
+});
+
+document.querySelectorAll('[data-business-age]').forEach((el) => {
+  const founded = Number(el.dataset.founded);
+  if (Number.isFinite(founded)) el.textContent = `for ${currentYear - founded} years`;
+});
+
+document.querySelectorAll('[data-business-age-short]').forEach((el) => {
+  const founded = Number(el.dataset.founded);
+  if (Number.isFinite(founded)) el.textContent = `${currentYear - founded}+ years of delivery`;
+});
 
 /* ─── Load-in (kinetic hero) ───
    Reveal as soon as the DOM is ready. We deliberately do NOT wait for the
@@ -29,51 +45,78 @@ if (!prefersReducedMotion) {
 }
 
 /* ─── Reveal on scroll ─── */
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.12, rootMargin: '0px 0px -5% 0px' }
-);
+const revealElements = document.querySelectorAll('[data-reveal]');
 
-document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+if ('IntersectionObserver' in window && !prefersReducedMotion) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -5% 0px' }
+  );
+
+  document.documentElement.classList.add('reveal-ready');
+  revealElements.forEach((el) => revealObserver.observe(el));
+} else {
+  revealElements.forEach((el) => el.classList.add('is-visible'));
+}
 
 /* ─── Animated counters ─── */
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+const counterElements = document.querySelectorAll('[data-count], [data-count-from-year]');
+const getCounterTarget = (el) => {
+  if (el.dataset.countFromYear) return currentYear - Number(el.dataset.countFromYear);
+  return Number(el.dataset.count);
+};
 
-      const el = entry.target;
-      const target = Number(el.dataset.count);
-      const start = Number(el.dataset.start) || 0;
-      const duration = 1800;
-      const startTime = performance.now();
+const setCounterFinalValue = (el) => {
+  const target = getCounterTarget(el);
+  if (Number.isFinite(target)) el.textContent = target;
+};
 
-      const animate = (now) => {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
-        el.textContent = Math.round(start + (target - start) * eased);
-        if (progress < 1) requestAnimationFrame(animate);
-      };
+if ('IntersectionObserver' in window) {
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-      if (prefersReducedMotion) {
-        el.textContent = target;
-      } else {
-        requestAnimationFrame(animate);
-      }
-      counterObserver.unobserve(el);
-    });
-  },
-  { threshold: 0.5 }
-);
+        const el = entry.target;
+        const target = getCounterTarget(el);
+        const start = Number(el.dataset.start) || 0;
+        const duration = 1800;
+        const startTime = performance.now();
 
-document.querySelectorAll('[data-count]').forEach((el) => counterObserver.observe(el));
+        if (!Number.isFinite(target)) {
+          counterObserver.unobserve(el);
+          return;
+        }
+
+        const animate = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          el.textContent = Math.round(start + (target - start) * eased);
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+
+        if (prefersReducedMotion) {
+          el.textContent = target;
+        } else {
+          requestAnimationFrame(animate);
+        }
+        counterObserver.unobserve(el);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counterElements.forEach((el) => counterObserver.observe(el));
+} else {
+  counterElements.forEach(setCounterFinalValue);
+}
 
 /* ─── Scroll engine (single rAF loop for all scrub effects) ─── */
 const header = document.getElementById('site-header');
@@ -159,27 +202,73 @@ update();
 /* ─── Mobile menu ─── */
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+const mobileBreakpoint = window.matchMedia('(max-width: 640px)');
 
-if (menuToggle && mobileMenu) {
-  const setMenu = (open) => {
+if (menuToggle && mobileMenu && mobileMenuClose) {
+  const pageRegions = [header, document.querySelector('main'), document.querySelector('footer')].filter(Boolean);
+  let menuWasOpened = false;
+
+  const getMenuFocusables = () => Array.from(
+    mobileMenu.querySelectorAll('a[href], button:not([disabled])')
+  ).filter((el) => !el.hidden && el.getClientRects().length > 0);
+
+  const setMenu = (open, { restoreFocus = true } = {}) => {
     document.body.classList.toggle('menu-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     mobileMenu.setAttribute('aria-hidden', String(!open));
-    if (open) header.classList.remove('is-hidden');
+    if (open) {
+      mobileMenu.setAttribute('role', 'dialog');
+      mobileMenu.setAttribute('aria-modal', 'true');
+    } else {
+      mobileMenu.removeAttribute('role');
+      mobileMenu.removeAttribute('aria-modal');
+    }
+    pageRegions.forEach((region) => { region.inert = open; });
+
+    if (open) {
+      menuWasOpened = true;
+      header.classList.remove('is-hidden');
+      requestAnimationFrame(() => mobileMenuClose.focus());
+    } else if (restoreFocus && menuWasOpened) {
+      menuWasOpened = false;
+      menuToggle.focus({ preventScroll: true });
+    }
   };
 
   menuToggle.addEventListener('click', () => {
-    setMenu(!document.body.classList.contains('menu-open'));
+    setMenu(true);
   });
+
+  mobileMenuClose.addEventListener('click', () => setMenu(false));
 
   mobileMenu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => setMenu(false));
   });
 
-  window.addEventListener('keydown', (e) => {
+  mobileMenu.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      const focusables = getMenuFocusables();
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
     if (e.key === 'Escape') setMenu(false);
   });
+
+  mobileBreakpoint.addEventListener('change', (event) => {
+    if (!event.matches) setMenu(false, { restoreFocus: false });
+  });
+
+  setMenu(false, { restoreFocus: false });
 }
 
 /* ─── Magnetic buttons (fine pointers only) ─── */
@@ -200,13 +289,5 @@ if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
   });
 }
 
-/* ─── Email obfuscation ─── */
-const emailLink = document.getElementById('email-link');
-const emailText = document.getElementById('email-text');
-if (emailLink && emailText) {
-  const user = 'enquiries';
-  const domain = 'lowesbuildingservices.co.uk';
-  const addr = user + '@' + domain;
-  emailLink.href = 'mailto:' + addr;
-  emailText.textContent = addr;
-}
+/* Mark the enhanced mobile navigation ready only after all setup succeeds. */
+document.documentElement.classList.add('app-ready');
