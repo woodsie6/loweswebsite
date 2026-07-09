@@ -2,8 +2,18 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/lowesbui/public_html
-    - /bin/cp index.html $DEPLOYPATH/
-    - /bin/cp styles.css $DEPLOYPATH/
-    - /bin/cp app.js $DEPLOYPATH/
-    - /bin/cp .htaccess $DEPLOYPATH/
-    - /bin/cp -R assets/ $DEPLOYPATH/
+    - export STAGEPATH=/home/lowesbui/.lowes-deploy-stage
+    - /bin/rm -rf $STAGEPATH
+    - /bin/mkdir -p $STAGEPATH/assets $DEPLOYPATH/assets
+    - /bin/cp index.html styles.css app.js .htaccess $STAGEPATH/
+    - /bin/cp -R assets/. $STAGEPATH/assets/
+    - /usr/bin/rsync --archive --delete --delay-updates $STAGEPATH/assets/ $DEPLOYPATH/assets/
+    - /usr/bin/install -m 0644 $STAGEPATH/styles.css $DEPLOYPATH/styles.css.next
+    - /usr/bin/install -m 0644 $STAGEPATH/app.js $DEPLOYPATH/app.js.next
+    - /usr/bin/install -m 0644 $STAGEPATH/.htaccess $DEPLOYPATH/.htaccess.next
+    - /usr/bin/install -m 0644 $STAGEPATH/index.html $DEPLOYPATH/index.html.next
+    - /bin/mv -f $DEPLOYPATH/styles.css.next $DEPLOYPATH/styles.css
+    - /bin/mv -f $DEPLOYPATH/app.js.next $DEPLOYPATH/app.js
+    - /bin/mv -f $DEPLOYPATH/.htaccess.next $DEPLOYPATH/.htaccess
+    - /bin/mv -f $DEPLOYPATH/index.html.next $DEPLOYPATH/index.html
+    - /bin/rm -rf $STAGEPATH

@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Marks JS as available before first paint so reveal animations start
-         hidden (external file to satisfy the CSP `script-src 'self'` rule). -->
-    <script src="./assets/head.js"></script>
+    <!-- Marks JavaScript as available before first paint. The exact script hash
+         is allowlisted by the Content Security Policy in .htaccess. -->
+    <script>document.documentElement.classList.add("js");</script>
     <meta
       name="description"
       content="Lowes Building Services Limited — trusted construction, planned maintenance and contracted reactive response for councils and education providers across North Wales and North West England. Est. 1998."
@@ -13,22 +13,26 @@
     <meta property="og:title" content="Lowes Building Services Limited | Construction &amp; Maintenance" />
     <meta property="og:description" content="Trusted construction, planned maintenance and contracted reactive response for the public sector. Est. 1998. SafeContractor Approved. Constructionline Silver." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="./assets/logo-dark.png" />
+    <meta property="og:url" content="https://lowesbuildingservices.co.uk/" />
+    <meta property="og:image" content="https://lowesbuildingservices.co.uk/assets/logo-dark.png" />
+    <meta property="og:image:width" content="268" />
+    <meta property="og:image:height" content="170" />
+    <meta property="og:image:alt" content="Lowes Building Services Limited" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Lowes Building Services Limited | Construction &amp; Maintenance" />
+    <meta name="twitter:description" content="Trusted construction, planned maintenance and contracted reactive response for the public sector." />
+    <meta name="twitter:image" content="https://lowesbuildingservices.co.uk/assets/logo-dark.png" />
     <title>Lowes Building Services Limited | Construction &amp; Maintenance</title>
+    <link rel="canonical" href="https://lowesbuildingservices.co.uk/" />
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-      rel="stylesheet"
-      crossorigin
-    />
     <link rel="stylesheet" href="./styles.css" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "GeneralContractor",
       "name": "Lowes Building Services Limited",
+      "url": "https://lowesbuildingservices.co.uk/",
+      "image": "https://lowesbuildingservices.co.uk/assets/logo-dark.png",
       "telephone": "+441244552233",
       "email": "enquiries@lowesbuildingservices.co.uk",
       "foundingDate": "1998",
@@ -60,14 +64,17 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>01244 552233</span>
         </a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <span></span><span></span>
         </button>
       </div>
     </header>
 
     <!-- ═══ Mobile menu ═══ -->
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <section class="mobile-menu" id="mobile-menu" aria-label="Primary navigation" aria-hidden="false">
+      <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Close menu">
+        <span></span><span></span>
+      </button>
       <nav class="mobile-menu-links" aria-label="Mobile">
         <a href="#services"><em>01</em>Services</a>
         <a href="#process"><em>02</em>How We Work</a>
@@ -78,7 +85,7 @@
         <a class="btn btn-accent btn-lg btn-block" href="#contact">Get a Fast Quote</a>
         <a class="mobile-menu-phone" href="tel:01244552233">Call the team &middot; 01244 552233</a>
       </div>
-    </div>
+    </section>
 
     <main id="top">
 
@@ -146,7 +153,7 @@
           <div class="hero-overlay" aria-hidden="true"></div>
           <div class="container hero-content">
             <p class="hero-tag load-in" style="--d:0.1s">Est. 1998 &middot; North Wales &amp; North West England</p>
-            <h1 class="kinetic" aria-label="We build, maintain and protect the spaces your community relies on.">
+            <h1 class="kinetic">
               <span class="line"><span class="w" style="--d:0.20s">We&nbsp;build,</span> <span class="w" style="--d:0.28s">maintain</span></span>
               <span class="line"><span class="w" style="--d:0.36s">and&nbsp;protect</span> <span class="w" style="--d:0.44s">the&nbsp;spaces</span></span>
               <span class="line"><span class="w" style="--d:0.52s">your&nbsp;community</span></span>
@@ -155,7 +162,7 @@
             <p class="hero-sub load-in" style="--d:0.75s">
               Construction, planned maintenance and contracted emergency response
               for councils and education providers — delivered by one accountable
-              team for over 27 years.
+              team <span data-business-age data-founded="1998">since 1998</span>.
             </p>
             <div class="hero-actions load-in" style="--d:0.9s">
               <a class="btn btn-accent btn-lg" href="#contact" data-magnetic>
@@ -166,7 +173,7 @@
                 Speak to the Team
               </a>
             </div>
-            <div class="hero-badges load-in" style="--d:1.05s" aria-label="Accreditations">
+            <div class="hero-badges load-in" style="--d:1.05s">
               <span>SafeContractor Approved</span>
               <span>Constructionline Silver</span>
               <span>Public Sector Frameworks</span>
@@ -202,7 +209,7 @@
               <div class="badge-year">1998</div>
               <div class="badge-info">
                 <span class="badge-name">Established</span>
-                <span class="badge-status">27+ years of delivery</span>
+                <span class="badge-status" data-business-age-short data-founded="1998">Since 1998</span>
               </div>
             </div>
           </div>
@@ -216,7 +223,7 @@
           <h2 class="stats-heading" data-reveal>Chosen and re-chosen,<br />year after year.</h2>
           <div class="stats-grid">
             <article data-reveal style="--d:0.05s">
-              <p class="stat-number"><span data-count="27">0</span><em>+</em></p>
+              <p class="stat-number"><span data-count-from-year="1998">28</span><em>+</em></p>
               <p class="stat-label">Years of continuous delivery</p>
             </article>
             <article data-reveal style="--d:0.12s">
@@ -458,7 +465,7 @@
             <p class="section-intro">
               Public sector estates don't run like private ones — procurement,
               compliance, term dates, stakeholders. We've worked inside those
-              constraints for 27 years, so you don't spend your time explaining them.
+              constraints <span data-business-age data-founded="1998">since 1998</span>, so you don't spend your time explaining them.
             </p>
             <ul class="check-list">
               <li>Framework-oriented, collaborative delivery</li>
@@ -543,28 +550,32 @@
             </p>
             <p class="contact-area">Serving North Wales &amp; North West England &middot; Est. 1998</p>
           </div>
-          <div class="contact-links" role="list" data-reveal style="--d:0.15s">
-            <a role="listitem" class="contact-card" href="tel:01244552233">
-              <span class="contact-card-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </span>
-              <span class="contact-card-body">
-                <strong>Call us now</strong>
-                <span>01244 552233 &middot; direct to the team</span>
-              </span>
-              <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
-            </a>
-            <a role="listitem" class="contact-card" id="email-link" href="#">
-              <span class="contact-card-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
-              </span>
-              <span class="contact-card-body">
-                <strong>Email your enquiry</strong>
-                <span id="email-text">Loading&hellip;</span>
-              </span>
-              <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
-            </a>
-          </div>
+          <ul class="contact-links" data-reveal style="--d:0.15s">
+            <li>
+              <a class="contact-card" href="tel:01244552233">
+                <span class="contact-card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <span class="contact-card-body">
+                  <strong>Call us now</strong>
+                  <span>01244 552233 &middot; direct to the team</span>
+                </span>
+                <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-card" id="email-link" href="mailto:enquiries@lowesbuildingservices.co.uk">
+                <span class="contact-card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+                </span>
+                <span class="contact-card-body">
+                  <strong>Email your enquiry</strong>
+                  <span id="email-text">enquiries@lowesbuildingservices.co.uk</span>
+                </span>
+                <span class="contact-card-arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -585,7 +596,7 @@
         </nav>
         <div class="footer-meta">
           <p>SafeContractor Approved &middot; Constructionline Silver</p>
-          <p>&copy; 2026 Lowes Building Services Limited</p>
+          <p>&copy; <span data-current-year>2026</span> Lowes Building Services Limited</p>
         </div>
       </div>
     </footer>
